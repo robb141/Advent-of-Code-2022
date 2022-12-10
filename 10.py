@@ -12,54 +12,57 @@ end = 220
 end2 = 40 * 6
 counter = 0
 X = 1
+
+
+def check(counter, X):
+    if counter in [20, 60, 100, 140, 180, 220]:
+        return counter * X
+    return 0
+
+
 for i in lines:
     if i[0] == 'noop':
         counter += 1
-        if counter in [20, 60, 100, 140, 180, 220]:
-            ans1 += (counter * X)
+        ans1 += check(counter, X)
     else:
         counter += 1
-        if counter in [20, 60, 100, 140, 180, 220]:
-            ans1 += (counter * X)
+        ans1 += check(counter, X)
         counter += 1
-        if counter in [20, 60, 100, 140, 180, 220]:
-            ans1 += (counter * X)
+        ans1 += check(counter, X)
         X += i[1]
     if counter > end:
         break
-print(ans1)
+
+
+def check2(counter2, X2):
+    if counter2 in [X2 - 1, X2, X2 + 1]:
+        return '#'
+    else:
+        return '.'
+
 
 counter2 = 0
 X2 = 1
 for i in lines:
     if i[0] == 'noop':
-        if counter2 in [X2 - 1, X2, X2 + 1]:
-            ans2 += '#'
-        else:
-            ans2 += '.'
+        ans2 += check2(counter2, X2)
         counter2 += 1
         if counter2 % 40 == 0:
             X2 += 40
     else:
-        if counter2 in [X2 - 1, X2, X2 + 1]:
-            ans2 += '#'
-        else:
-            ans2 += '.'
+        ans2 += check2(counter2, X2)
         counter2 += 1
         if counter2 % 40 == 0:
             X2 += 40
-        if counter2 in [X2 - 1, X2, X2 + 1]:
-            ans2 += '#'
-        else:
-            ans2 += '.'
+        ans2 += check2(counter2, X2)
         counter2 += 1
         if counter2 % 40 == 0:
             X2 += 40
-
         X2 += i[1]
     if counter2 > end2:
         break
 
-
+print(f'Result 1 is: {ans1}')
+print(f'Result 2 is:')
 for i in range(0, len(ans2), 40):
     print(ans2[i:i+40])
