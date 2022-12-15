@@ -5,16 +5,7 @@ from collections import defaultdict
 with open(os.path.basename(__file__).split('.')[0] + '.txt', 'r') as f:
     lines = f.read().splitlines()
 
-d_files = {}
-d_dir = {}
-
-ans1 = {}
-ans2 = ''
-print(lines)
-
-
 path = []
-# path.append('/')
 S = defaultdict(int)
 for line in lines:
     words = line.strip().split(' ')
@@ -31,11 +22,11 @@ for line in lines:
         sz = int(words[0])
         for i in range(1, len(path)+1):
             S['/'.join(path[:i])] += sz
-print(S)
 
 total = 70000000 - max(S.values())
 needed = 30000000 - total
 ans1 = 0
+ans2 = 0
 smallest = float('inf')
 for k, v in S.items():
     if v < 100000:
@@ -46,6 +37,6 @@ for k, v in S.items():
             smallest = diff
             ans2 = S[k]
 
-print(ans1)
-print(ans2)
+print(f'Result 1 is: {ans1}')
+print(f'Result 2 is: {ans2}')
 
